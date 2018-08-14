@@ -47,7 +47,13 @@
             },
             drinks() {
                 return this.group.users.reduce((value, id) => {
-                    return value + this.$store.state.users[id].drinks;
+                    const user = this.$store.state.users[id];
+
+                    if (user) {
+                        return value + user.drinks;
+                    }
+
+                    return value
                 }, 0);
             }
         }
