@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Overview from './components/Overview'
-import Group from './components/Group'
+import Overview from '../components/Overview'
+import Group from '../components/Group'
 
 Vue.use(VueRouter);
 
@@ -13,7 +13,7 @@ export default new VueRouter({
             component: Overview
         },
         {
-            path: '/:id(\\d+)',
+            path: '/:id',
             name: 'group',
             component: Group
         }

@@ -26,14 +26,11 @@
 
 <script>
     import Header from "./Header"
+    import '../api/auth'
 
     export default {
         components: {
             Header
-        },
-
-        // mounted() {
-        //     this.$store.dispatch('join', 1);
-        // }
+        }
     }
 </script>

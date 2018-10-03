@@ -23,11 +23,11 @@
         <h2 class="group__name">{{group.id}}</h2>
         <span class="group__info">
             <span class="icon icon--group"></span>
-            {{group.users.length}}
+            {{group.data().users.length}}
         </span>
         <span class="group__info">
             <span class="icon icon--beer"></span>
-            {{drinks}}
+            {{group.data().drinks}}
         </span>
     </section>
 </template>
@@ -35,26 +35,10 @@
 <script>
     export default {
         props: {
-            id: [Number, String],
+            group: Object,
             classes: {
                 type: Array,
                 default: () => []
-            }
-        },
-        computed: {
-            group() {
-                return this.$store.state.groups[this.$props.id]
-            },
-            drinks() {
-                return this.group.users.reduce((value, id) => {
-                    const user = this.$store.state.users[id];
-
-                    if (user) {
-                        return value + user.drinks;
-                    }
-
-                    return value
-                }, 0);
             }
         }
     }

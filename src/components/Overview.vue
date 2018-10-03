@@ -37,11 +37,11 @@
             <h2 class="group__name">{{group.id}}</h2>
             <span class="group__info">
                 <span class="icon icon--group"></span>
-                {{group.users.length}}
+                {{group.data().users.length}}
             </span>
             <span class="group__info">
                 <span class="icon icon--beer"></span>
-                {{maxDrinks}}
+                {{group.data().drinks}}
             </span>
         </router-link>
     </section>
@@ -49,15 +49,9 @@
 
 <script>
     export default {
-        data() {
-            return {
-                groups: this.$store.state.groups
-            }
-        },
         computed: {
-            maxDrinks() {
-                const users = this.$store.state.users;
-                return Math.max.apply(null, Object.values(users).map(({drinks}) => drinks))
+            groups() {
+                return this.$store.state.groups;
             }
         },
         methods: {

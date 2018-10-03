@@ -88,11 +88,11 @@
                 return this.$store.state.user.drinks;
             },
             permille() {
-                console.log(this.$store.state.user.permille)
                 return this.$store.state.user.permille;
             },
             name: {
                 get() {
+                    console.log(this.$store.state.user);
                     return this.$store.state.user.name
                 },
                 set(value) {

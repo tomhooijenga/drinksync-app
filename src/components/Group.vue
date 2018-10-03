@@ -28,7 +28,8 @@
 
 <template>
     <section v-if="group">
-        <GroupEntry :id="$route.params.id" :classes="['group', 'group--header']"/>
+        <GroupEntry :group="group" :classes="['group', 'group--header']"/>
+
         <section class="user"
                  v-for="user in users">
             <span class="user__name">
@@ -49,12 +50,12 @@
             <button type="button"
                     class="button button--outline"
                     v-on:click="leave"
-                    v-if="user.groups.includes(group.id)">
+                    v-if="true">
                 Leave this group
             </button>
             <button type="button" class="button button--outline"
                     v-on:click="join"
-                    v-if="user.groups.includes(group.id) === false">
+                    v-if="true">
                 Join this group
             </button>
         </section>
@@ -63,30 +64,43 @@
 
 <script>
     import GroupEntry from './GroupEntry'
+    import {db} from '../api/db'
 
     export default {
-        mounted() {
-          this.$store.dispatch('get', this.$route.params.id);
-        },
         components: {
             GroupEntry
         },
+        data() {
+            return {
+                group: null,
+                users: []
+            }
+        },
+        beforeMount() {
+            // fetch group from FireStore
+            db
+                .collection('groups')
+                .doc(this.$route.params.id)
+                .onSnapshot(doc => {
+                    this.group = doc;
+                    this.users = {};
+
+                    doc
+                        .data()
+                        .users
+                        .forEach(user => {
+                            user.onSnapshot(user => {
+                                this.users = {
+                                    ...this.users,
+                                    [user.id]: user.data()
+                                };
+                            })
+                        })
+                });
+        },
         computed: {
-            group() {
-                return this.$store.state.groups[this.$route.params.id]
-            },
             user() {
                 return this.$store.state.user
-            },
-            users() {
-                return this.group.users
-                    .map(id => {
-                        return this.$store.state.users[id];
-                    })
-                    .filter(user => user)
-                    .sort((a, b) => {
-                        return b.drinks - a.drinks
-                    });
             },
             url() {
                 return window.location.origin + '/' + this.$router.resolve({
