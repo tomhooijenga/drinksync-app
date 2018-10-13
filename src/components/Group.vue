@@ -4,10 +4,11 @@
 
     .user {
         box-shadow: 0px 7px 7px -5px rgba(0, 0, 0, .4) inset;
-        padding: 1rem 10vw;
+        padding: 1rem 5vw;
         display: flex;
         flex-direction: row;
     }
+
     .user__name {
         flex: 3;
     }
@@ -28,7 +29,7 @@
 
 <template>
     <section v-if="group">
-        <GroupEntry :group="group" :classes="['group', 'group--header']"/>
+        <GroupEntry :group="group"/>
 
         <section class="user"
                  v-for="user in users">
@@ -39,7 +40,7 @@
                 {{user.drinks}}
             </span>
             <span class="user__data">
-                {{user.permille.toFixed(2)}} &permil;
+                {{(user.ppm / 1000).toFixed(2)}} &permil;
             </span>
         </section>
 
@@ -50,12 +51,12 @@
             <button type="button"
                     class="button button--outline"
                     v-on:click="leave"
-                    v-if="true">
+                    v-if="joined">
                 Leave this group
             </button>
             <button type="button" class="button button--outline"
                     v-on:click="join"
-                    v-if="true">
+                    v-if="joined === false">
                 Join this group
             </button>
         </section>
@@ -63,60 +64,62 @@
 </template>
 
 <script>
+    import Vue from 'vue'
     import GroupEntry from './GroupEntry'
-    import {db} from '../api/db'
+    import socket from "../api";
 
     export default {
+        props: {
+            id: String,
+        },
+        mounted() {
+            socket.emit('group.get', this.$store.state.token, this.id, group => {
+                this.$store.commit('group.update', group);
+            });
+        },
+        beforeDestroy() {
+            if (!this.joined) {
+                Vue.delete(this.$store.state.groups, this.id);
+            }
+        },
         components: {
             GroupEntry
         },
-        data() {
-            return {
-                group: null,
-                users: []
-            }
-        },
-        beforeMount() {
-            // fetch group from FireStore
-            db
-                .collection('groups')
-                .doc(this.$route.params.id)
-                .onSnapshot(doc => {
-                    this.group = doc;
-                    this.users = {};
-
-                    doc
-                        .data()
-                        .users
-                        .forEach(user => {
-                            user.onSnapshot(user => {
-                                this.users = {
-                                    ...this.users,
-                                    [user.id]: user.data()
-                                };
-                            })
-                        })
-                });
-        },
         computed: {
-            user() {
-                return this.$store.state.user
+            group() {
+                return this.$store.state.groups[this.id];
+            },
+            users() {
+                return this.group
+                    .users
+                    .map(({id}) => this.$store.state.users[id])
+                    .sort((a, b) => {
+                        return b.drinks - a.drinks
+                    });
             },
             url() {
                 return window.location.origin + '/' + this.$router.resolve({
                     name: 'group',
                     params: {
-                        id: this.$route.params.id
+                        id: this.id
                     }
                 }).href
-            }
+            },
+            joined() {
+                const userId = this.$store.state.user.id;
+
+                return this
+                    .group
+                    .users
+                    .find(user => user.id === userId) !== undefined;
+            },
         },
         methods: {
             leave() {
-                this.$store.dispatch('leave', this.$route.params.id);
+                this.$store.dispatch('group.leave', this.id);
             },
             join() {
-                this.$store.dispatch('join',  this.$route.params.id);
+                this.$store.dispatch('group.join', this.id);
             }
         }
     }

@@ -15,7 +15,8 @@ export default new VueRouter({
         {
             path: '/:id',
             name: 'group',
-            component: Group
+            component: Group,
+            props: true
         }
     ]
 });

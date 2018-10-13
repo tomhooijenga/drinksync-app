@@ -7,7 +7,7 @@
     }
 
     .overview__header {
-        padding: 0 10vw;
+        padding: 0 5vw;
         font-weight: normal;
         display: flex;
     }
@@ -31,17 +31,17 @@
 
         <router-link tag="div"
                      key="group.id"
-                     :to="{name: 'group', params: {id: group.id}}"
+                     :to="{name: 'group', params: {id: group.name}}"
                      v-for="group in groups"
                      class="group">
-            <h2 class="group__name">{{group.id}}</h2>
+            <h2 class="group__name">{{group.name}}</h2>
             <span class="group__info">
                 <span class="icon icon--group"></span>
-                {{group.data().users.length}}
+                {{group.users.length}}
             </span>
             <span class="group__info">
                 <span class="icon icon--beer"></span>
-                {{group.data().drinks}}
+                {{drinks(group)}}
             </span>
         </router-link>
     </section>
@@ -49,14 +49,19 @@
 
 <script>
     export default {
-        computed: {
-            groups() {
-                return this.$store.state.groups;
+        data() {
+            return {
+                groups: this.$store.state.groups
             }
         },
         methods: {
             create() {
-                this.$store.dispatch('create');
+                this.$store.dispatch('group.create');
+            },
+            drinks(group) {
+                return group.users.reduce((total, user) => {
+                    return total + user.drinks;
+                }, 0);
             }
         }
     }

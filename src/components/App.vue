@@ -8,6 +8,7 @@
         background: linear-gradient(to bottom right, #8f94fb, #4e54c8);
         min-height: 100vh;
         color: white;
+        font-size: 16px;
     }
 
     .app {
@@ -26,11 +27,14 @@
 
 <script>
     import Header from "./Header"
-    import '../api/auth'
 
     export default {
         components: {
             Header
+        },
+
+        mounted() {
+            this.$store.dispatch('user.join');
         }
     }
 </script>

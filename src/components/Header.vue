@@ -11,7 +11,7 @@
 
     .banner {
         display: flex;
-        padding: 0 10vw
+        padding: 0 5vw
     }
 
     .banner__stats {
@@ -51,7 +51,8 @@
 </style>
 
 <template>
-    <section class="header">
+    <section class="header"
+             v-if="user">
 
         <section class="buttons">
             <button class="button button--header button--primary button--large"
@@ -75,7 +76,7 @@
             <input class="banner__input input" type="text" v-model="name"/>
             <span class="banner__stats">
                 <span class="banner__stats__item">{{drinks}}</span>
-                <span class="banner__stats__item">{{permille.toFixed(2)}} &permil;</span>
+                <span class="banner__stats__item">{{(ppm / 1000).toFixed(2)}} &permil;</span>
             </span>
         </section>
     </section>
@@ -84,25 +85,31 @@
 <script>
     export default {
         computed: {
+            user() {
+                return this.$store.state.user;
+            },
             drinks() {
                 return this.$store.state.user.drinks;
             },
-            permille() {
-                return this.$store.state.user.permille;
+            ppm() {
+                return this.$store.state.user.ppm;
             },
             name: {
                 get() {
-                    console.log(this.$store.state.user);
-                    return this.$store.state.user.name
+                    return this.$store.state.user.name;
                 },
                 set(value) {
-                    this.$store.dispatch('name', value)
+                    this.$store.dispatch('user.update', {
+                        name: value
+                    })
                 }
             }
         },
         methods: {
             drink(amount) {
-                this.$store.dispatch('drink', amount);
+                this.$store.dispatch('user.update', {
+                    drinks: this.drinks + amount
+                });
             },
             binge(amount) {
                 this.intervalId = setInterval(() => {
