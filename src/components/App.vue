@@ -33,7 +33,7 @@
             Header
         },
 
-        mounted() {
+        created() {
             this.$store.dispatch('user.join');
         }
     }
