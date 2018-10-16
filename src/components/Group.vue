@@ -10,12 +10,14 @@
     }
 
     .user__name {
-        flex: 3;
+        flex: 3 1;
+        word-break: break-word;
     }
 
     .user__data {
-        flex: 1;
+        flex: 1 1 auto;
         text-align: right;
+        padding-left: 0.5rem;
     }
 
     .code {
@@ -40,7 +42,7 @@
                 {{user.drinks}}
             </span>
             <span class="user__data">
-                {{(user.ppm / 1000).toFixed(2)}} &permil;
+                {{(user.ppm / 1000).toFixed(2)}}&nbsp;&permil;
             </span>
         </section>
 
