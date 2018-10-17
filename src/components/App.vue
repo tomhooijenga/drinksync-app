@@ -1,16 +1,6 @@
 <style>
     @import "~normalize.css";
 
-    body {
-        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
-        background: #4e54c8;
-        background: -webkit-linear-gradient(to bottom right, #8f94fb, #4e54c8);
-        background: linear-gradient(to bottom right, #8f94fb, #4e54c8);
-        min-height: 100vh;
-        color: white;
-        font-size: 16px;
-    }
-
     .app {
         display: flex;
         flex-direction: column;
@@ -20,7 +10,6 @@
 <template>
     <main class="app">
         <Header />
-
         <router-view></router-view>
     </main>
 </template>
@@ -35,6 +24,13 @@
 
         created() {
             this.$store.dispatch('user.join');
+        },
+
+        computed: {
+            connected() {
+                console.log(this.$store.state.connected)
+                return this.$store.state.connected;
+            }
         }
     }
 </script>

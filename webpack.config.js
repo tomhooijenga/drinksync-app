@@ -1,6 +1,7 @@
 const {VueLoaderPlugin} = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const OfflinePlugin = require('offline-plugin')
 const path = require('path')
 
 module.exports = {
@@ -9,6 +10,19 @@ module.exports = {
     ],
     output: {
         path: path.resolve(__dirname, 'dist'),
+        filename: '[name].[contenthash].js'
+    },
+    optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/].*\.js$/,
+                    name: "vendor",
+                    chunks: "initial",
+                },
+            },
+        }
     },
     module: {
         rules: [
@@ -63,11 +77,10 @@ module.exports = {
             template: './src/index.html',
         }),
         new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
-            filename: "[name].css",
-            chunkFilename: "[id].css"
-        })
+            filename: "[name].[contenthash].css",
+            chunkFilename: "[name].[contenthash].css"
+        }),
+        new OfflinePlugin()
     ],
     devServer: {
         contentBase: './dist',
