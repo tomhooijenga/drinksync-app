@@ -1,7 +1,9 @@
 const {VueLoaderPlugin} = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const OfflinePlugin = require('offline-plugin')
+
 const path = require('path')
 
 module.exports = {
@@ -80,6 +82,11 @@ module.exports = {
             filename: "[name].[contenthash].css",
             chunkFilename: "[name].[contenthash].css"
         }),
+        new CopyWebpackPlugin([
+            'src/manifest.json',
+            'src/browserconfig.xml',
+            {from: 'src/assets/icons', to: 'icons'}
+        ]),
         new OfflinePlugin()
     ],
     devServer: {

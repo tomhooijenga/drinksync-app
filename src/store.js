@@ -19,7 +19,7 @@ const store = new Vuex.Store({
             ppm: 0
         },
         groups: {},
-        users: {},
+        users: {}
     },
     getters: {
         group(state) {
