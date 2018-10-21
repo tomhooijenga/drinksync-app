@@ -8,19 +8,11 @@ if (process.env.NODE_ENV !== 'production') {
 
 const socket = io(url);
 
-socket.on('user.join', function (data) {
-    store.commit('user.join', data);
-});
-
-socket.on('user.update', function (user) {
+socket.on('user.update', user => {
     store.commit('user.update', user);
 });
 
-socket.on('group.get', function (group) {
-    store.commit('group.update', group);
-});
-
-socket.on('group.update', function (group) {
+socket.on('group.update', group => {
     store.commit('group.update', group);
 });
 

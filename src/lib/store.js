@@ -53,8 +53,10 @@ const store = new Vuex.Store({
         }
     },
     actions: {
-        'user.join'({state}) {
-            socket.emit('user.join', state.token);
+        'user.join'({commit, state}) {
+            socket.emit('user.join', state.token, data => {
+                commit('user.join', data)
+            });
         },
         'user.update'({state, commit}, data) {
             socket.emit('user.update', state.token, data);

@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './components/App'
-import router from './router'
-import store from './store'
-import './pwa';
+import router from './lib/router'
+import store from './lib/store'
+import './lib/pwa';
 
 new Vue({
     el: '#app',

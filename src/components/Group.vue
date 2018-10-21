@@ -68,7 +68,7 @@
 <script>
     import Vue from 'vue'
     import GroupEntry from './GroupEntry'
-    import socket from "../api";
+    import socket from "../lib/api";
 
     export default {
         props: {
