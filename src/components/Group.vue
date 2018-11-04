@@ -20,17 +20,22 @@
         padding-left: 0.5rem;
     }
 
-    .code {
-        margin: 2rem 10vw;
-    }
-
     .controls {
+        margin-top: 2.34rem;
         text-align: center;
     }
 </style>
 
 <template>
     <section v-if="group">
+        <div class="controls"
+             v-if="joined === false">
+            <button type="button" class="button button--outline"
+                    v-on:click="join">
+                Join this group
+            </button>
+        </div>
+
         <GroupEntry :group="group"/>
 
         <section class="user"
@@ -45,21 +50,12 @@
                 {{(user.ppm / 1000).toFixed(2)}}&nbsp;&permil;
             </span>
         </section>
-
-        <section class="code">
-            <input type="text" class="input" :value="url" disabled/>
-        </section>
         <section class="controls">
             <button type="button"
                     class="button button--outline"
                     v-on:click="leave"
                     v-if="joined">
                 Leave this group
-            </button>
-            <button type="button" class="button button--outline"
-                    v-on:click="join"
-                    v-if="joined === false">
-                Join this group
             </button>
         </section>
     </section>
@@ -98,14 +94,6 @@
                     .sort((a, b) => {
                         return b.drinks - a.drinks
                     });
-            },
-            url() {
-                return window.location.origin + '/' + this.$router.resolve({
-                    name: 'group',
-                    params: {
-                        id: this.id
-                    }
-                }).href
             },
             joined() {
                 const userId = this.$store.state.user.id;
