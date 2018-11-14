@@ -10,6 +10,7 @@
 }
 
 .icon {
+    /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon' !important;
     speak: none;
     font-style: normal;
@@ -23,10 +24,30 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon--group:before {
-    content: "\e905";
+.icon--wine:before {
+    content: "\f102";
 }
 
-.icon--beer:before {
-    content: "\e902";
+.icon--beer-large:before {
+    content: "\f101";
+}
+
+.icon--cocktail:before {
+    content: "\f104";
+}
+
+.icon--shot:before {
+    content: "\f103";
+}
+
+.icon--beer-bottle:before {
+    content: "\f100";
+}
+
+.icon--beer-small:before {
+    content: "\f105";
+}
+
+.icon--group:before {
+    content: "\e905";
 }

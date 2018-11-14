@@ -44,7 +44,7 @@
                 {{user.name}}
             </span>
             <span class="user__data">
-                {{user.drinks}}
+                {{user.drinks.toFixed(2)}}
             </span>
             <span class="user__data">
                 {{(user.ppm / 1000).toFixed(2)}}&nbsp;&permil;

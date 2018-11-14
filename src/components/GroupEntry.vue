@@ -23,8 +23,8 @@
             {{group.users.length}}
         </span>
         <span class="group__info">
-            <span class="icon icon--beer"></span>
-            {{drinks}}
+            <span class="icon icon--beer-large"></span>
+            {{drinks.toFixed(2)}}
         </span>
     </section>
 </template>

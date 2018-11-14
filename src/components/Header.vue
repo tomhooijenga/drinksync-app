@@ -38,15 +38,20 @@
     }
 
     .buttons {
-        padding: 10vh 10vw;
+        padding: 10vh 5vw;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-content: center;
+        scroll-snap-type: x mandatory;
+        overflow-x: scroll;
     }
 
-    .button--header {
-        margin: auto;
+    .button--drink {
+        padding: 2rem;
+        font-size: 3rem;
+        line-height: 1;
+        scroll-snap-align: center;
+    }
+    .button--drink + .button--drink {
+        margin-left: 5vw;
     }
 </style>
 
@@ -55,27 +60,17 @@
              v-if="user">
 
         <section class="buttons">
-            <button class="button button--header button--primary button--large"
-                    v-on:click="drink(1)"
-                    v-on:mousedown="binge(1)"
-                    v-on:mouseup="stopBinge"
-                    v-on:mouseleave="stopBinge"
-                    v-on:contextmenu.prevent>
-                Drink!
-            </button>
-            <button class="button button--header button--link"
-                    v-on:click="drink(-1)"
-                    v-on:mousedown="binge(-1)"
-                    v-on:mouseup="stopBinge"
-                    v-on:mouseleave="stopBinge"
-                    v-on:contextmenu.prevent>
-                Remove
+            <button class="button button--drink"
+                    v-on:click="drink(type)"
+                    v-on:contextmenu.prevent
+                    v-for="type in types">
+                <span :class="`icon icon--${type.icon}`"></span>
             </button>
         </section>
         <section class="banner">
             <input class="banner__input input" type="text" v-model="name"/>
             <span class="banner__stats">
-                <span class="banner__stats__item">{{drinks}}</span>
+                <span class="banner__stats__item">{{drinks.toFixed(2)}}</span>
                 <span class="banner__stats__item">{{(ppm / 1000).toFixed(2)}} &permil;</span>
             </span>
         </section>
@@ -83,7 +78,14 @@
 </template>
 
 <script>
+    import types from '../lib/drinks'
+
     export default {
+        data() {
+            return {
+                types
+            }
+        },
         computed: {
             user() {
                 return this.$store.state.user;
@@ -106,18 +108,10 @@
             }
         },
         methods: {
-            drink(amount) {
+            drink({units}) {
                 this.$store.dispatch('user.update', {
-                    drinks: this.drinks + amount
+                    drinks: this.drinks + units
                 });
-            },
-            binge(amount) {
-                this.intervalId = setInterval(() => {
-                    this.drink(amount)
-                }, 200)
-            },
-            stopBinge() {
-                window.clearInterval(this.intervalId);
             }
         }
     }

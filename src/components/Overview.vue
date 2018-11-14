@@ -40,8 +40,8 @@
                 {{group.users.length}}
             </span>
             <span class="group__info">
-                <span class="icon icon--beer"></span>
-                {{drinks(group)}}
+                <span class="icon icon--beer-large"></span>
+                {{drinks(group).toFixed(2)}}
             </span>
         </router-link>
     </section>
