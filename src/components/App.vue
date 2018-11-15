@@ -9,16 +9,19 @@
 
 <template>
     <main class="app">
+        <InstallBanner />
         <Header />
         <router-view></router-view>
     </main>
 </template>
 
 <script>
+    import InstallBanner from './InstallBanner'
     import Header from "./Header"
 
     export default {
         components: {
+            InstallBanner,
             Header
         },
 

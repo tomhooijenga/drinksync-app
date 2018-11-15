@@ -7,5 +7,6 @@ export default {
         ppm: 0
     },
     groups: {},
-    users: {}
+    users: {},
+    installPrompt: null
 }

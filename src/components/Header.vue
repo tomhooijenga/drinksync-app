@@ -40,8 +40,9 @@
     .buttons {
         padding: 10vh 5vw;
         display: flex;
+        justify-content: space-between;
         scroll-snap-type: x mandatory;
-        overflow-x: scroll;
+        overflow-x: auto;
     }
 
     .button--drink {
