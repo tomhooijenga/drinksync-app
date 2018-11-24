@@ -23,5 +23,8 @@ export default {
     'group.update'(state, group) {
         Vue.set(state.groups, group.name, group);
         group.users.forEach(user => store.commit('user.update', user));
+    },
+    'install'(state, install) {
+        state.install = install;
     }
 }

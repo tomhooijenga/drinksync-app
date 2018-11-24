@@ -3,9 +3,13 @@ import store from "./store";
 
 install();
 
-window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent Chrome 67 and earlier from automatically showing the prompt
-    e.preventDefault();
+const appMode = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
 
-    store.state.installPrompt = e;
-});
+if (!appMode) {
+    window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        e.preventDefault();
+
+        store.state.install.prompt = e;
+    });
+}

@@ -8,5 +8,8 @@ export default {
     },
     groups: {},
     users: {},
-    installPrompt: null
+    install: {
+        prompt: null,
+        askAgain: null
+    }
 }

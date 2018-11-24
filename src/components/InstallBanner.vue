@@ -33,22 +33,31 @@
 </template>
 
 <script>
+    const SECONDS_PER_MONTH = 2592000000;
+
     export default {
         computed: {
             show() {
-                return this.$store.state.installPrompt;
+                const {prompt, askAgain} = this.$store.state.install;
+                return prompt && (askAgain === null || Date.now() > askAgain)
             }
         },
         methods: {
             close() {
-                this.$store.state.installPrompt = null;
+                this.$store.commit('install', {
+                    prompt: null,
+                    askAgain: Date.now() + SECONDS_PER_MONTH
+                });
             },
             install() {
-                const installPrompt = this.$store.state.installPrompt;
+                const installPrompt = this.$store.state.install.prompt;
 
                 installPrompt.prompt();
                 installPrompt.userChoice.then(() => {
-                    this.$store.state.installPrompt = null;
+                    this.$store.commit('install', {
+                        prompt: null,
+                        askAgain: null
+                    });
                 })
             }
         }
