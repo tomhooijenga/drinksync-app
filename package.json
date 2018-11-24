@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "lodash.debounce": "^4.0.8",
     "normalize.css": "^8.0.0",
     "offline-plugin": "^5.0.5",
     "socket.io-client": "^2.1.1",

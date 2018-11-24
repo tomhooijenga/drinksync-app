@@ -79,6 +79,7 @@
 </template>
 
 <script>
+    import debounce from 'lodash.debounce'
     import types from '../lib/drinks'
 
     export default {
@@ -101,11 +102,11 @@
                 get() {
                     return this.$store.state.user.name;
                 },
-                set(value) {
+                set: debounce(function (value) {
                     this.$store.dispatch('user.update', {
                         name: value
                     })
-                }
+                }, 100)
             }
         },
         methods: {
