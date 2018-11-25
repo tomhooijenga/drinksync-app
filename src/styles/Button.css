@@ -15,7 +15,8 @@
     border-radius: .25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     background: white;
-    color: #4e54c8
+    color: #4e54c8;
+    text-decoration: none;
 }
 
 .button--outline {
@@ -47,4 +48,10 @@
     background-color: transparent;
     background-image: none;
     color: white;
+}
+
+.button--header {
+    display: flex;
+    align-self: center;
+    height: 2rem;
 }

@@ -16,6 +16,11 @@
         align-self: flex-end;
         margin-left: auto;
     }
+
+    .group__name {
+        font-weight: normal;
+        white-space: nowrap;
+    }
 </style>
 
 <template>
@@ -25,7 +30,7 @@
             <button type="button"
                     class="button overview__header__button button--outline button--small"
                     v-on:click="create">
-                &plus;
+                <span class="icon icon--add"></span>
             </button>
         </h1>
 
@@ -36,7 +41,7 @@
                      class="group">
             <h2 class="group__name">{{group.name}}</h2>
             <span class="group__info">
-                <span class="icon icon--group"></span>
+                <span class="icon icon--people"></span>
                 {{group.users.length}}
             </span>
             <span class="group__info">

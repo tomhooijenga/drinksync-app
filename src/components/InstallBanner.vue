@@ -19,7 +19,7 @@
     <section class="install-banner"
              v-if="show">
         <p>
-            Add DrinkSync to your homescreen for easier tracking
+            Add Drink Sync to your homescreen for easier tracking
         </p>
         <div class="install-banner__buttons">
             <button type="button" class="button button--outline" v-on:click="close">
