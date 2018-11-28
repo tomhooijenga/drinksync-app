@@ -61,7 +61,7 @@
                 </div>
 
                 <button type="button" class="button button--outline button--small button--header"
-                        v-if="share"
+                        v-if="canShare"
                         v-on:click="share">
                     <span class="icon icon--share"></span>
                 </button>
@@ -83,7 +83,7 @@
     export default {
         data() {
             return {
-                share: navigator.share !== undefined
+                canShare: navigator.share !== undefined
             }
         },
         props: {
