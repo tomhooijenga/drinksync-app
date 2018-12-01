@@ -24,7 +24,7 @@ export function shareGroup(group) {
 
     const share = navigator.share({
         text,
-        title: `Join our group "${this.group.name}" on Drink Sync`,
+        title: `Join the group "${group.name}" on Drink Sync`,
         url: window.location.href
     });
 
