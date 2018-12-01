@@ -80,10 +80,13 @@
 </template>
 
 <script>
+    import {shareGroup} from "../lib/share";
+
     export default {
         data() {
             return {
-                canShare: navigator.share !== undefined
+                // canShare: navigator.share !== undefined
+                canShare: true
             }
         },
         props: {
@@ -103,10 +106,7 @@
         },
         methods: {
             share() {
-                navigator.share({
-                    title: 'Drink Sync',
-                    text: 'Join my group to have some drinks!'
-                })
+                shareGroup(this.group);
             }
         }
     }
