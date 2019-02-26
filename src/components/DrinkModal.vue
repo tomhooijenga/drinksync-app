@@ -12,9 +12,14 @@
         display: flex;
         justify-content: space-between;
     }
+
     .input__label {
         display: block;
         margin-bottom: 1rem;
+    }
+
+    .input__optional {
+        color: rgba(255, 255, 255, 0.2)
     }
 </style>
 
@@ -39,6 +44,7 @@
             <label class="input__label"
                    for="name">
                 Name
+                <small class="input__optional">optional</small>
             </label>
             <input type="text"
                    class="input"
@@ -67,7 +73,7 @@
                    v-model="drink.percentage"/>
         </div>
         <div class="input__group input__group--buttons"
-            v-if="mode === 'edit'">
+             v-if="mode === 'edit'">
             <button @click="remove"
                     class="button button--outline">
                 Delete
@@ -123,6 +129,9 @@
                 this.close();
             },
             add() {
+                this.drink.volume = this.drink.volume || 0;
+                this.drink.percentage = this.drink.percentage || 0;
+
                 this.$store.commit('drink.add', this.drink);
                 this.close();
             },
