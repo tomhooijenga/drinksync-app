@@ -76,6 +76,13 @@
     import DrinkButton from './DrinkButton'
     import DrinkModal from './DrinkModal'
 
+    const modalOptions = {
+        adaptive: true,
+        height: 'auto',
+        width: '80%',
+        maxWidth: 600
+    };
+
     export default {
         components: {
             DrinkButton
@@ -108,16 +115,12 @@
             edit(drink) {
                 this.$modal.show(DrinkModal, {
                     drink
-                }, {
-                    height: 'auto'
-                });
+                }, modalOptions);
             },
             add() {
                 this.$modal.show(DrinkModal, {
                     mode: 'add'
-                }, {
-                    height: 'auto'
-                });
+                }, modalOptions);
             }
         }
     }

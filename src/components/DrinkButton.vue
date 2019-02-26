@@ -29,6 +29,7 @@
         justify-content: center;
         width: 8.75rem;
         height: 8.75rem;
+        flex-shrink: 0;
     }
 
     .drink-button + .drink-button {
@@ -65,7 +66,8 @@
     <button class="drink-button"
             v-on:click="consume(drink)">
         <span class="drink-button__stat drink-button__stat--top"
-              v-text="drink.name || drink.category.name"/>
+              v-text="drink.name || drink.category.name">
+        </span>
         <span :class="`icon icon--${drink.category.icon}`"></span>
         <span class="drink-button__stat drink-button__stat--bottom">
             <span class="drink-button__stat">{{drink.volume}} ml</span>
