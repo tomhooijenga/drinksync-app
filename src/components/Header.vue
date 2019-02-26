@@ -15,7 +15,7 @@
     }
 
     .banner__stats {
-        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: .3rem;
         display: inline-block;
         line-height: 42px;
@@ -44,16 +44,6 @@
         scroll-snap-type: x mandatory;
         overflow-x: auto;
     }
-
-    .button--drink {
-        padding: 2rem;
-        font-size: 3rem;
-        line-height: 1;
-        scroll-snap-align: center;
-    }
-    .button--drink + .button--drink {
-        margin-left: 5vw;
-    }
 </style>
 
 <template>
@@ -61,17 +51,20 @@
              v-if="user">
 
         <section class="buttons">
-            <button class="button button--drink"
-                    v-on:click="drink(type)"
-                    v-on:contextmenu.prevent
-                    v-for="type in types">
-                <span :class="`icon icon--${type.icon}`"></span>
+            <DrinkButton v-for="drink of drinks"
+                         @contextmenu.prevent.native="edit(drink)"
+                         :drink="drink"/>
+            <button class="drink-button"
+                    @click="add"
+                    @contextmenu.prevent="add">
+                <span class="icon icon--add"></span>
             </button>
+
         </section>
         <section class="banner">
             <input class="banner__input input" type="text" v-model="name"/>
             <span class="banner__stats">
-                <span class="banner__stats__item">{{drinks.toFixed(2)}}</span>
+                <span class="banner__stats__item">{{units.toFixed(2)}}</span>
                 <span class="banner__stats__item">{{(ppm / 1000).toFixed(2)}} &permil;</span>
             </span>
         </section>
@@ -80,23 +73,25 @@
 
 <script>
     import debounce from 'lodash.debounce'
-    import types from '../lib/drinks'
+    import DrinkButton from './DrinkButton'
+    import DrinkModal from './DrinkModal'
 
     export default {
-        data() {
-            return {
-                types
-            }
+        components: {
+            DrinkButton
         },
         computed: {
             user() {
                 return this.$store.state.user;
             },
-            drinks() {
+            units() {
                 return this.$store.state.user.drinks;
             },
             ppm() {
                 return this.$store.state.user.ppm;
+            },
+            drinks() {
+                return this.$store.state.drinks;
             },
             name: {
                 get() {
@@ -110,9 +105,18 @@
             }
         },
         methods: {
-            drink({units}) {
-                this.$store.dispatch('user.update', {
-                    drinks: this.drinks + units
+            edit(drink) {
+                this.$modal.show(DrinkModal, {
+                    drink
+                }, {
+                    height: 'auto'
+                });
+            },
+            add() {
+                this.$modal.show(DrinkModal, {
+                    mode: 'add'
+                }, {
+                    height: 'auto'
                 });
             }
         }

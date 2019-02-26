@@ -1,33 +1,33 @@
-// fluitje
-// vaasje
-// flesje
-// wijn
-// shot
-// cocktail
+export const categories = [{
+    icon: 'beer-large',
+    name: 'Beer',
+}, {
+    icon: 'wine',
+    name: 'Wine'
+}, {
+    icon: 'cocktail',
+    name: 'Cocktail'
+}, {
+    icon: 'shot',
+    name: 'Spirit'
+}, {
+    icon: 'beer-bottle',
+    name: 'Other'
+}];
 
-export default [{
+export const defaultDrinks = [{
+    name: 'Beer',
     volume: 200,
     percentage: 5,
-    units: 1,
-    icon: 'beer-small'
+    category: categories[0]
 }, {
-    volume: 250,
-    percentage: 5,
-    units: 1.25,
-    icon: 'beer-large'
-}, {
-    volume: 300,
-    percentage: 5,
-    units: 1.5,
-    icon: 'beer-bottle'
-}, {
+    name: 'Wine',
     volume: 100,
     percentage: 12,
-    units: 1.2,
-    icon: 'wine'
+    category: categories[1]
 }, {
+    name: 'Shot',
     volume: 40,
     percentage: 40,
-    units: 1.6,
-    icon: 'shot'
+    category: categories[3]
 }];

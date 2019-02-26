@@ -12,6 +12,7 @@
         <InstallBanner />
         <Header />
         <router-view></router-view>
+        <modals-container/>
     </main>
 </template>
 
@@ -31,7 +32,6 @@
 
         computed: {
             connected() {
-                console.log(this.$store.state.connected)
                 return this.$store.state.connected;
             }
         }

@@ -24,6 +24,22 @@ export default {
         Vue.set(state.groups, group.name, group);
         group.users.forEach(user => store.commit('user.update', user));
     },
+    'drink.add'(state, drink) {
+        let i = 0;
+        let found = false;
+        for (; i < state.drinks.length; i++) {
+            if (state.drinks[i].category.name === drink.category.name) {
+                found = true;
+            } else if (found) {
+                break;
+            }
+        }
+
+        state.drinks.splice(i, 0, drink);
+    },
+    'drink.remove'(state, drink) {
+        state.drinks = state.drinks.filter(d => d !== drink);
+    },
     'install'(state, install) {
         state.install = install;
     }

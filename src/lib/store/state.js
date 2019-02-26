@@ -1,3 +1,5 @@
+import {defaultDrinks} from '../drinks'
+
 export default {
     token: '',
     user: {
@@ -8,6 +10,7 @@ export default {
     },
     groups: {},
     users: {},
+    drinks: [...defaultDrinks],
     install: {
         prompt: null,
         askAgain: null

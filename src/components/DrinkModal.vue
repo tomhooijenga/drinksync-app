@@ -1,0 +1,134 @@
+<style scoped>
+    .modal__drink {
+        background: #4e54c8;
+        padding: 1rem;
+    }
+
+    .input__group + .input__group {
+        margin-top: 2rem;
+    }
+
+    .input__group--buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+    .input__label {
+        display: block;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<template>
+    <section class="modal__drink">
+        <div class="input__group">
+            <label class="input__label"
+                   for="category">
+                Category
+            </label>
+            <select class="input"
+                    id="category"
+                    v-model="drink.category">
+                <option v-for="category in categories"
+                        :value="category">
+                    {{category.name}}
+                </option>
+            </select>
+        </div>
+
+        <div class="input__group">
+            <label class="input__label"
+                   for="name">
+                Name
+            </label>
+            <input type="text"
+                   class="input"
+                   id="name"
+                   v-model="drink.name"/>
+        </div>
+
+        <div class="input__group">
+            <label class="input__label"
+                   for="volume">
+                Volume
+            </label>
+            <input type="number"
+                   class="input"
+                   id="volume"
+                   v-model="drink.volume"/>
+        </div>
+        <div class="input__group">
+            <label class="input__label"
+                   for="percentage">
+                Percentage
+            </label>
+            <input type="number"
+                   class="input"
+                   id="percentage"
+                   v-model="drink.percentage"/>
+        </div>
+        <div class="input__group input__group--buttons"
+            v-if="mode === 'edit'">
+            <button @click="remove"
+                    class="button button--outline">
+                Delete
+            </button>
+
+            <button @click="close"
+                    class="button button--primary">
+                Close
+            </button>
+        </div>
+        <div class="input__group input__group--buttons"
+             v-if="mode === 'add'">
+            <button @click="close"
+                    class="button button--outline">
+                Close
+            </button>
+
+            <button @click="add"
+                    class="button button--primary">
+                Add
+            </button>
+        </div>
+    </section>
+</template>
+
+<script>
+    import {categories, defaultDrinks} from "../lib/drinks";
+
+    export default {
+        props: {
+            drink: {
+                type: Object,
+                default() {
+                    return {
+                        ...defaultDrinks[0],
+                        name: ''
+                    }
+                }
+            },
+            mode: {
+                type: String,
+                default: 'edit'
+            }
+        },
+        data() {
+            return {
+                categories
+            }
+        },
+        methods: {
+            remove() {
+                this.$store.commit('drink.remove', this.drink);
+                this.close();
+            },
+            add() {
+                this.$store.commit('drink.add', this.drink);
+                this.close();
+            },
+            close() {
+                this.$emit('close');
+            }
+        }
+    }
+</script>

@@ -11,3 +11,7 @@
     width: 100%;
     box-sizing: border-box;
 }
+
+select.input  option {
+    color: #4e54c8;
+}
