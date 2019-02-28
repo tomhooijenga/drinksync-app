@@ -26,8 +26,11 @@
     color: white;
 }
 
-.button--primary:active {
-    box-shadow: 0 0 0 0.2rem #4e54c8
+.button--outline-danger {
+    background-color: transparent;
+    background-image: none;
+    border-color: #c84e54;
+    color: #c84e54;
 }
 
 .button--large {

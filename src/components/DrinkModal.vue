@@ -75,13 +75,13 @@
         <div class="input__group input__group--buttons"
              v-if="mode === 'edit'">
             <button @click="remove"
-                    class="button button--outline">
+                    class="button button--outline-danger">
                 Delete
             </button>
 
             <button @click="close"
                     class="button button--primary">
-                Close
+                Done
             </button>
         </div>
         <div class="input__group input__group--buttons"
