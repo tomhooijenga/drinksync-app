@@ -72,56 +72,56 @@
 </template>
 
 <script>
-    import debounce from 'lodash.debounce'
-    import DrinkButton from './DrinkButton'
-    import DrinkModal from './DrinkModal'
+import debounce from 'lodash.debounce'
+import DrinkButton from './DrinkButton'
+import DrinkModal from './DrinkModal'
 
-    const modalOptions = {
-        adaptive: true,
-        height: 'auto',
-        width: '80%',
-        maxWidth: 600
-    };
+const modalOptions = {
+  adaptive: true,
+  height: 'auto',
+  width: '80%',
+  maxWidth: 600
+}
 
-    export default {
-        components: {
-            DrinkButton
-        },
-        computed: {
-            user() {
-                return this.$store.state.user;
-            },
-            units() {
-                return this.$store.state.user.drinks;
-            },
-            ppm() {
-                return this.$store.state.user.ppm;
-            },
-            drinks() {
-                return this.$store.state.drinks;
-            },
-            name: {
-                get() {
-                    return this.$store.state.user.name;
-                },
-                set: debounce(function (value) {
-                    this.$store.dispatch('user.update', {
-                        name: value
-                    })
-                }, 100)
-            }
-        },
-        methods: {
-            edit(drink) {
-                this.$modal.show(DrinkModal, {
-                    drink
-                }, modalOptions);
-            },
-            add() {
-                this.$modal.show(DrinkModal, {
-                    mode: 'add'
-                }, modalOptions);
-            }
-        }
+export default {
+  components: {
+    DrinkButton
+  },
+  computed: {
+    user () {
+      return this.$store.state.user
+    },
+    units () {
+      return this.$store.state.user.drinks
+    },
+    ppm () {
+      return this.$store.state.user.ppm
+    },
+    drinks () {
+      return this.$store.state.drinks
+    },
+    name: {
+      get () {
+        return this.$store.state.user.name
+      },
+      set: debounce(function (value) {
+        this.$store.dispatch('user.update', {
+          name: value
+        })
+      }, 100)
     }
+  },
+  methods: {
+    edit (drink) {
+      this.$modal.show(DrinkModal, {
+        drink
+      }, modalOptions)
+    },
+    add () {
+      this.$modal.show(DrinkModal, {
+        mode: 'add'
+      }, modalOptions)
+    }
+  }
+}
 </script>

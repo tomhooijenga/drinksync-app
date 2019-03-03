@@ -39,7 +39,8 @@
         <GroupEntry :group="group"/>
 
         <section class="user"
-                 v-for="user in users">
+                 v-for="user in users"
+                 :key="user.id">
             <span class="user__name">
                 {{user.name}}
             </span>
@@ -62,55 +63,55 @@
 </template>
 
 <script>
-    import Vue from 'vue'
-    import GroupEntry from './GroupEntry'
-    import socket from "../lib/api";
+import Vue from 'vue'
+import GroupEntry from './GroupEntry'
+import socket from '../lib/api'
 
-    export default {
-        props: {
-            id: String,
-        },
-        mounted() {
-            socket.emit('group.get', this.$store.state.token, this.id, group => {
-                this.$store.commit('group.update', group);
-            });
-        },
-        beforeDestroy() {
-            if (!this.joined) {
-                Vue.delete(this.$store.state.groups, this.id);
-            }
-        },
-        components: {
-            GroupEntry
-        },
-        computed: {
-            group() {
-                return this.$store.state.groups[this.id];
-            },
-            users() {
-                return this.group
-                    .users
-                    .map(({id}) => this.$store.state.users[id])
-                    .sort((a, b) => {
-                        return b.drinks - a.drinks
-                    });
-            },
-            joined() {
-                const userId = this.$store.state.user.id;
-
-                return this
-                    .group
-                    .users
-                    .find(user => user.id === userId) !== undefined;
-            },
-        },
-        methods: {
-            leave() {
-                this.$store.dispatch('group.leave', this.id);
-            },
-            join() {
-                this.$store.dispatch('group.join', this.id);
-            }
-        }
+export default {
+  props: {
+    id: String
+  },
+  mounted () {
+    socket.emit('group.get', this.$store.state.token, this.id, group => {
+      this.$store.commit('group.update', group)
+    })
+  },
+  beforeDestroy () {
+    if (!this.joined) {
+      Vue.delete(this.$store.state.groups, this.id)
     }
+  },
+  components: {
+    GroupEntry
+  },
+  computed: {
+    group () {
+      return this.$store.state.groups[this.id]
+    },
+    users () {
+      return this.group
+        .users
+        .map(({ id }) => this.$store.state.users[id])
+        .sort((a, b) => {
+          return b.drinks - a.drinks
+        })
+    },
+    joined () {
+      const userId = this.$store.state.user.id
+
+      return this
+        .group
+        .users
+        .find(user => user.id === userId) !== undefined
+    }
+  },
+  methods: {
+    leave () {
+      this.$store.dispatch('group.leave', this.id)
+    },
+    join () {
+      this.$store.dispatch('group.join', this.id)
+    }
+  }
+}
 </script>

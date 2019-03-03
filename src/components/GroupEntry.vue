@@ -80,34 +80,34 @@
 </template>
 
 <script>
-    import {shareGroup} from "../lib/share";
+import { shareGroup } from '../lib/share'
 
-    export default {
-        data() {
-            return {
-                // canShare: navigator.share !== undefined
-                canShare: true
-            }
-        },
-        props: {
-            group: Object,
-            classes: {
-                type: Array,
-                default: () => []
-            }
-        },
-        computed: {
-            drinks() {
-                return this.group.users
-                    .reduce((total, user) => {
-                        return total + user.drinks;
-                    }, 0);
-            }
-        },
-        methods: {
-            share() {
-                shareGroup(this.group);
-            }
-        }
+export default {
+  data () {
+    return {
+      // canShare: navigator.share !== undefined
+      canShare: true
     }
+  },
+  props: {
+    group: Object,
+    classes: {
+      type: Array,
+      default: () => []
+    }
+  },
+  computed: {
+    drinks () {
+      return this.group.users
+        .reduce((total, user) => {
+          return total + user.drinks
+        }, 0)
+    }
+  },
+  methods: {
+    share () {
+      shareGroup(this.group)
+    }
+  }
+}
 </script>

@@ -35,7 +35,7 @@
         </h1>
 
         <router-link tag="div"
-                     key="group.id"
+                     :key="group.id"
                      :to="{name: 'group', params: {id: group.name}}"
                      v-for="group in groups"
                      class="group">
@@ -53,21 +53,21 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                groups: this.$store.state.groups
-            }
-        },
-        methods: {
-            create() {
-                this.$store.dispatch('group.create');
-            },
-            drinks(group) {
-                return group.users.reduce((total, user) => {
-                    return total + user.drinks;
-                }, 0);
-            }
-        }
+export default {
+  data () {
+    return {
+      groups: this.$store.state.groups
     }
+  },
+  methods: {
+    create () {
+      this.$store.dispatch('group.create')
+    },
+    drinks (group) {
+      return group.users.reduce((total, user) => {
+        return total + user.drinks
+      }, 0)
+    }
+  }
+}
 </script>

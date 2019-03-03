@@ -1,4 +1,4 @@
-<style scoped>
+<style>
     .modal__drink {
         background: #4e54c8;
         padding: 1rem;
@@ -34,7 +34,8 @@
                     id="category"
                     v-model="drink.category">
                 <option v-for="category in categories"
-                        :value="category">
+                        :value="category"
+                        :key="category.name">
                     {{category.name}}
                 </option>
             </select>
@@ -102,44 +103,44 @@
 </template>
 
 <script>
-    import {categories, defaultDrinks} from "../lib/drinks";
+import { categories, defaultDrinks } from '../lib/drinks'
 
-    export default {
-        props: {
-            drink: {
-                type: Object,
-                default() {
-                    return {
-                        ...defaultDrinks[0],
-                        name: ''
-                    }
-                }
-            },
-            mode: {
-                type: String,
-                default: 'edit'
-            }
-        },
-        data() {
-            return {
-                categories
-            }
-        },
-        methods: {
-            remove() {
-                this.$store.commit('drink.remove', this.drink);
-                this.close();
-            },
-            add() {
-                this.drink.volume = this.drink.volume || 0;
-                this.drink.percentage = this.drink.percentage || 0;
-
-                this.$store.commit('drink.add', this.drink);
-                this.close();
-            },
-            close() {
-                this.$emit('close');
-            }
+export default {
+  props: {
+    drink: {
+      type: Object,
+      default () {
+        return {
+          ...defaultDrinks[0],
+          name: ''
         }
+      }
+    },
+    mode: {
+      type: String,
+      default: 'edit'
     }
+  },
+  data () {
+    return {
+      categories
+    }
+  },
+  methods: {
+    remove () {
+      this.$store.commit('drink.remove', this.drink)
+      this.close()
+    },
+    add () {
+      this.drink.volume = this.drink.volume || 0
+      this.drink.percentage = this.drink.percentage || 0
+
+      this.$store.commit('drink.add', this.drink)
+      this.close()
+    },
+    close () {
+      this.$emit('close')
+    }
+  }
+}
 </script>

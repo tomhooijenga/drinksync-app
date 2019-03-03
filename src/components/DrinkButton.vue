@@ -76,20 +76,20 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            drink: Object
-        },
+export default {
+  props: {
+    drink: Object
+  },
 
-        methods: {
-            consume({volume, percentage}) {
-                const units = volume * percentage / 1000;
-                const drinks = this.$store.state.user.drinks;
+  methods: {
+    consume ({ volume, percentage }) {
+      const units = volume * percentage / 1000
+      const drinks = this.$store.state.user.drinks
 
-                this.$store.dispatch('user.update', {
-                    drinks: drinks + units
-                });
-            }
-        }
+      this.$store.dispatch('user.update', {
+        drinks: drinks + units
+      })
     }
+  }
+}
 </script>

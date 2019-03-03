@@ -9,31 +9,25 @@
 
 <template>
     <main class="app">
-        <InstallBanner />
-        <Header />
-        <router-view></router-view>
+        <InstallBanner/>
+        <Header/>
+        <router-view/>
         <modals-container/>
     </main>
 </template>
 
 <script>
-    import InstallBanner from './InstallBanner'
-    import Header from "./Header"
+  import InstallBanner from './InstallBanner'
+  import Header from './Header'
 
-    export default {
-        components: {
-            InstallBanner,
-            Header
-        },
+  export default {
+    components: {
+      InstallBanner,
+      Header
+    },
 
-        created() {
-            this.$store.dispatch('user.join');
-        },
-
-        computed: {
-            connected() {
-                return this.$store.state.connected;
-            }
-        }
+    created() {
+      this.$store.dispatch('user.join')
     }
+  }
 </script>
