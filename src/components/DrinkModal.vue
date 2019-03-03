@@ -56,6 +56,7 @@
             <label class="input__label"
                    for="volume">
                 Volume
+                <small class="input__optional">ml</small>
             </label>
             <input type="number"
                    class="input"
@@ -66,6 +67,7 @@
             <label class="input__label"
                    for="percentage">
                 Percentage
+                <small class="input__optional">&percnt;</small>
             </label>
             <input type="number"
                    class="input"
