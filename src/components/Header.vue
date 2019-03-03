@@ -1,7 +1,4 @@
 <style>
-    @import "../styles/Button.css";
-    @import "../styles/Input.css";
-
     .header {
         display: flex;
         flex-direction: column;

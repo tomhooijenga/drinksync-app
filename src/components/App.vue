@@ -1,5 +1,8 @@
 <style>
-    @import "~normalize.css";
+    @import '~normalize.css';
+    @import '../styles/Icons.css';
+    @import '../styles/Button.css';
+    @import '../styles/Input.css';
 
     .app {
         display: flex;

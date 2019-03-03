@@ -1,12 +1,5 @@
 <style>
-    .group {
-        box-shadow: 0px 7px 7px -5px rgba(0, 0, 0, .4) inset;
-        padding: 1rem 5vw
-    }
-
-    .group--header {
-        box-shadow: none;
-    }
+    @import '../styles/Group.css';
 
     .page-header__nav {
         display: flex;
@@ -48,7 +41,6 @@
 
 <template>
     <section class="group group--header" v-if="group">
-
         <header class="page-header">
             <div class="page-header__nav">
                 <router-link :to="{name: 'index'}"
@@ -85,8 +77,7 @@ import { shareGroup } from '../lib/share'
 export default {
   data () {
     return {
-      // canShare: navigator.share !== undefined
-      canShare: true
+      canShare: navigator.share !== undefined
     }
   },
   props: {

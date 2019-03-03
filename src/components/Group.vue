@@ -1,7 +1,4 @@
 <style>
-    @import "../styles/Button.css";
-    @import "../styles/Input.css";
-
     .user {
         box-shadow: 0px 7px 7px -5px rgba(0, 0, 0, .4) inset;
         padding: 1rem 5vw;

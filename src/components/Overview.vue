@@ -1,6 +1,5 @@
 <style>
-    @import "../styles/Button.css";
-    @import "../styles/Icons.css";
+    @import '../styles/Group.css';
 
     .overview {
         flex: 1
@@ -15,11 +14,6 @@
     .overview__header__button {
         align-self: flex-end;
         margin-left: auto;
-    }
-
-    .group__name {
-        font-weight: normal;
-        white-space: nowrap;
     }
 </style>
 
