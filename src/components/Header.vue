@@ -72,6 +72,7 @@
 import debounce from 'lodash.debounce'
 import DrinkButton from './DrinkButton'
 import DrinkModal from './DrinkModal'
+import { mapState } from 'vuex'
 
 const modalOptions = {
   adaptive: true,
@@ -85,18 +86,12 @@ export default {
     DrinkButton
   },
   computed: {
-    user () {
-      return this.$store.state.user
-    },
-    units () {
-      return this.$store.state.user.drinks
-    },
-    ppm () {
-      return this.$store.state.user.ppm
-    },
-    drinks () {
-      return this.$store.state.drinks
-    },
+    ...mapState({
+      user: 'user',
+      drinks: 'drinks',
+      units: state => state.user.drinks,
+      ppm: state => state.user.ppm
+    }),
     name: {
       get () {
         return this.$store.state.user.name

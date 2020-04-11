@@ -47,12 +47,16 @@
 </template>
 
 <script>
+
+import { mapState } from 'vuex'
+
 export default {
-  data () {
-    return {
-      groups: this.$store.state.groups
-    }
+  created () {
+    console.log(this.groups)
   },
+
+  computed: mapState(['groups']),
+
   methods: {
     create () {
       this.$store.dispatch('group.create')
