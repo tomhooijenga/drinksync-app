@@ -18,7 +18,6 @@
         line-height: 42px;
         font-size: 1.25rem;
         height: 42px;
-        padding: 0 0.5rem;
         margin-left: 1rem;
         text-align: center;
         color: white;
@@ -27,10 +26,10 @@
     .banner__stats__item {
         display: inline-block;
         height: 100%;
+        padding: 0 0.5rem;
     }
 
     .banner__stats__item + .banner__stats__item {
-        padding-left: 0.5rem;
         border-left: 1px solid rgba(255, 255, 255, 0.2);
     }
 
@@ -49,6 +48,7 @@
 
         <section class="buttons">
             <DrinkButton v-for="drink of drinks"
+                         :key="drink"
                          @contextmenu.prevent.native="edit(drink)"
                          :drink="drink"/>
             <button class="drink-button"

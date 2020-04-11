@@ -4,9 +4,6 @@
         text-align: center;
         white-space: nowrap;
         vertical-align: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
         user-select: none;
         border: 1px solid transparent;
         font-size: 1rem;
@@ -43,6 +40,8 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        display: flex;
+        justify-content: space-evenly;
     }
 
     .drink-button__stat--top {
