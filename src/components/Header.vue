@@ -48,16 +48,16 @@
 
         <section class="buttons">
             <DrinkButton v-for="drink of drinks"
-                         :key="drink"
                          @contextmenu.prevent.native="edit(drink)"
+                         :key="drink.key"
                          :drink="drink"/>
             <button class="drink-button"
                     @click="add"
                     @contextmenu.prevent="add">
                 <span class="icon icon--add"></span>
             </button>
-
         </section>
+
         <section class="banner">
             <input class="banner__input input" type="text" v-model="name"/>
             <span class="banner__stats">

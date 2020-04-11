@@ -25,17 +25,12 @@ export default {
     group.users.forEach(user => store.commit('user.update', user))
   },
   'drink.add' (state, drink) {
-    let i = 0
-    let found = false
-    for (; i < state.drinks.length; i++) {
-      if (state.drinks[i].category.name === drink.category.name) {
-        found = true
-      } else if (found) {
-        break
-      }
-    }
+    const index = state.drinks.findIndex((d) => {
+      return d.category.name === drink.category.name
+    })
+    drink.key = Math.random()
 
-    state.drinks.splice(i, 0, drink)
+    state.drinks.splice(Math.max(index, 0), 0, drink)
   },
   'drink.remove' (state, drink) {
     state.drinks = state.drinks.filter(d => d !== drink)
