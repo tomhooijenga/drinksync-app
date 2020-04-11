@@ -9,6 +9,7 @@ Vue.use(VModal, {
   dynamic: true
 })
 
+// eslint-disable-next-line no-new
 new Vue({
   el: '#app',
   store,

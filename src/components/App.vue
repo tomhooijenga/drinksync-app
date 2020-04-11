@@ -20,17 +20,17 @@
 </template>
 
 <script>
-  import InstallBanner from './InstallBanner'
-  import Header from './Header'
+import InstallBanner from './InstallBanner'
+import Header from './Header'
 
-  export default {
-    components: {
-      InstallBanner,
-      Header
-    },
+export default {
+  components: {
+    InstallBanner,
+    Header
+  },
 
-    created() {
-      this.$store.dispatch('user.join')
-    }
+  created () {
+    this.$store.dispatch('user.join')
   }
+}
 </script>
