@@ -22,13 +22,9 @@ export function shareGroup (group) {
   }
   text += '!'
 
-  const share = navigator.share({
+  return navigator.share({
     text,
     title: `Join the group "${group.name}" on Drink Sync`,
     url: window.location.href
   })
-
-  share.then(() => gtag('event', 'share'))
-
-  return share
 }
