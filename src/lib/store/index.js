@@ -13,7 +13,9 @@ const emptyGroup = {
 }
 
 const store = new Vuex.Store({
-  plugins: [createPersistedState()],
+  plugins: [createPersistedState({
+    paths: ['token', 'drinks', 'install.askAgain']
+  })],
   state,
   getters: {
     group (state) {

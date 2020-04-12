@@ -51,10 +51,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  created () {
-    console.log(this.groups)
-  },
-
   computed: mapState(['groups']),
 
   methods: {
